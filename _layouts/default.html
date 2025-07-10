@@ -10,6 +10,28 @@
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
+<script>
+  // Run when the page loads
+  window.onload = function() {
+    // Get query parameters from the URL
+    const params = new URLSearchParams(window.location.search);
+    const key = params.get('key');
+    const value = params.get('value');
+
+    // Check if the expected parameters exist
+    if (key === 'key' && value === 'value') {
+      // Perform an action, e.g., display a message or modify the page
+      console.log('Query parameters matched: key=key&value=value');
+      // Example: Update a DOM element
+      const messageDiv = document.createElement('div');
+      messageDiv.textContent = 'Loaded with key=key&value=value!';
+      document.body.appendChild(messageDiv);
+    } else {
+      console.log('Query parameters not found or incorrect');
+    }
+  };
+</script>
+	  
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
