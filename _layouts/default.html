@@ -12,10 +12,9 @@
 
 <!-- Assessment Query String Params -->
 <script>
-  // Initialize dataLayer if not already defined
   window.dataLayer = window.dataLayer || [];
   
-  // Get query parameters
+  // Capture query parameters
   const params = new URLSearchParams(window.location.search);
   const keyParam = params.get('key');
   const valueParam = params.get('value');
@@ -23,7 +22,7 @@
   // Push query parameters to dataLayer
   window.dataLayer.push({
     'event': 'query_string_load',
-    'query_key': keyParam || 'undefined', // Fallback if parameter is missing
+    'query_key': keyParam || 'undefined',
     'query_value': valueParam || 'undefined'
   });
 </script>
