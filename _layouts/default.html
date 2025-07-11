@@ -12,15 +12,20 @@
 
 <!-- Assessment Query String Params -->
 <script>
-  // Run when the page loads
-  window.onload = function() {
-    // Get query parameters from the URL
-    const params = new URLSearchParams(window.location.search);
-    const key = params.get('key');
-    const value = params.get('value');
-
-    }
-  };
+  // Initialize dataLayer if not already defined
+  window.dataLayer = window.dataLayer || [];
+  
+  // Get query parameters
+  const params = new URLSearchParams(window.location.search);
+  const keyParam = params.get('key');
+  const valueParam = params.get('value');
+  
+  // Push query parameters to dataLayer
+  window.dataLayer.push({
+    'event': 'query_string_load',
+    'query_key': keyParam || 'undefined', // Fallback if parameter is missing
+    'query_value': valueParam || 'undefined'
+  });
 </script>
 <!-- End Assessment Query String Params -->
 	  
