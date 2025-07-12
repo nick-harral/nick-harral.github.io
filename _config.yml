@@ -4,4 +4,3 @@ plugins:
 
 title: Nick's Incredible Website
 description: As my grandma used to say, "Do or do not. There is no try"... or was that Master Yoda?
-<img src="{{ 'assets/optimize_discovery.jpg' | relative_url }}" alt="Speaking of buttons...">
