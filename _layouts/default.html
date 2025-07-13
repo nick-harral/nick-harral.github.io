@@ -79,6 +79,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	 <div id="api-result"></div>
 		 
 <script>
+  // Initialize GTM data layer
+  window.dataLayer = window.dataLayer || [];
+
+  // Capture query parameters
+  const params = new URLSearchParams(window.location.search);
+  const keyParam = params.get('key') || 'undefined';
+  const valueParam = params.get('value') || 'undefined';
+
+  // Push query parameters to GTM data layer
+  window.dataLayer.push({
+    event: 'query_string_load',
+    query_key: keyParam,
+    query_value: valueParam
+  });
+
+  // Handle button click with API call
   async function handleButtonClick() {
     try {
       const apiUrl = `https://httpbin.org/get?key=${encodeURIComponent(keyParam)}&value=${encodeURIComponent(valueParam)}`;
@@ -98,6 +114,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       document.getElementById('api-result').textContent = `Key: ${data.args.key || 'none'}, Value: ${data.args.value || 'none'}`;
       console.log('HTTPBin Data:', data);
 
+      window.dataLayer.push({
+        event: 'button_click',
+        button_id: 'action-button',
+        api_status: 'success',
+        api_response: JSON.stringify(data.args).substring(0, 100)
       });
     } catch (error) {
       console.error('API Error:', error);
@@ -111,6 +132,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }
   }
 
+  // Attach event listener to fix "handleButtonClick is not defined"
   document.getElementById('action-button').addEventListener('click', handleButtonClick);
 </script>
         </section>
