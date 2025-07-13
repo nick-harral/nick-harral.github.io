@@ -76,27 +76,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
    <hr>
         <section id="Button">
          <h2>Speaking of buttons...<h2>
-   <button id="action-button" onclick="handleButtonClick()">Click Me!</button>
-     
-<script>
-   async function handleButtonClick() {
-    try {
-      const apiUrl = `https://httpbin.org/get?key=${encodeURIComponent(keyParam)}&value=${encodeURIComponent(valueParam)}`;
-      const response = await fetch(apiUrl, {
-        method: 'GET',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }
-      });
+ 	  <button id="apiButton">Fetch Data</button>
+	  <div id="apiResponse"></div>
 
-     } catch (error) {
-    console.error('Fetch error:', error.message);
-    return null;
-    }    
-  // Attach event listener to fix "handleButtonClick is not defined"
-  document.getElementById('action-button').addEventListener('click', handleButtonClick);
-</script>
+	<script>
+	document.addEventListener("DOMContentLoaded", function() {
+    	const apiButton = document.getElementById("apiButton");
+    	const apiResponse = document.getElementById("apiResponse");
+
+    	apiButton.addEventListener("click", async function() {
+        const apiUrl = "https://api.example.com/data"; // Replace with your API endpoint
+
+        try {
+            const response = await fetch(apiUrl, { method: 'GET' });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json(); 
+            apiResponse.innerHTML = JSON.stringify(data, null, 2); 
+            console.log(data);
+        } catch (error) {
+            apiResponse.innerHTML = `Error: ${error.message}`;
+            console.error("Error fetching data:", error);
+        }
+	</script>
         </section>
 	      
         <footer>
