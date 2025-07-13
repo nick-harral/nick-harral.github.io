@@ -19,7 +19,7 @@
   const keyParam = params.get('key');
   const valueParam = params.get('value');
   
-  // Push query parameters to dataLayer
+  // Push query params to dataLayer
   window.dataLayer.push({
     'event': 'query_string_load',
     'query_key': keyParam || 'undefined',
