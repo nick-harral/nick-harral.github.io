@@ -78,17 +78,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	 <button id="action-button" onclick="handleButtonClick()">Click Me!</button>
 	<script>
 	 async function handleButtonClick() {
-          try {
-           // Make an API call
-		const response = await fetch('https://httpbin.org/get?key=key&value=value', {
-		method: 'GET',
-		headers: {
-		'Content-Type': 'application/json',
-		});
+    try {
+      // Construct API URL with dynamic query parameters
+      const apiUrl = `https://httpbin.org/get?key=${encodeURIComponent(keyParam)}&value=${encodeURIComponent(valueParam)}`;
 
-		if (!response.ok) {
-		throw new Error(`API call unsuccessful: ${response.status}`);
-     	 }
+      // Make GET request
+      const response = await fetch(apiUrl, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      });
+
+      // Check response status
+      if (!response.ok) {
+        throw new Error(`API call failed with status: ${response.status}`);
+      }
+
+      // Parse and display response
+      const data = await response.json();
+      document.getElementById('api-result').textContent = `API Response: ${JSON.stringify(data, null, 2)}`;
+      console.log('HTTPBin Data:', data);
 	</script>
         </section>
 
