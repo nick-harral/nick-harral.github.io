@@ -1,0 +1,29 @@
+ <section id="main_content">
+	  <h4>*new advertisers be like*<h4>
+          <img src="{{ 'assets/images/optimize_discovery.jpg' | relative_url }}" alt="Speaking of buttons...">
+        </section>
+	 <hr>
+        <section id="Button">
+         <h2>Speaking of buttons...<h2>
+	 <button id="action-button" onclick="handleButtonClick()">Click Me!</button>
+		 
+<script>
+   async function handleButtonClick() {
+    try {
+      const apiUrl = `https://httpbin.org/get?key=${encodeURIComponent(keyParam)}&value=${encodeURIComponent(valueParam)}`;
+      const response = await fetch(apiUrl, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      });
+
+     } catch (error) {
+    console.error('Fetch error:', error.message);
+    return null;
+    }    
+  // Attach event listener to fix "handleButtonClick is not defined"
+  document.getElementById('action-button').addEventListener('click', handleButtonClick);
+</script>
+        </section>
