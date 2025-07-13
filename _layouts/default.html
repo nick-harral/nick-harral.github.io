@@ -85,7 +85,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     	const apiResponse = document.getElementById("apiResponse");
 
     	apiButton.addEventListener("click", async function() {
-        const apiUrl = "https://api.example.com/data"; // Replace with your API endpoint
+        const apiUrl = "https://httpbin.org/get?key=key&value=value";
 
         try {
             const response = await fetch(apiUrl, { method: 'GET' });
