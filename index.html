@@ -1,11 +1,13 @@
- <section id="main_content">
-	  <h4>*new advertisers be like*<h4>
-          <img src="{{ 'assets/images/optimize_discovery.jpg' | relative_url }}" alt="Speaking of buttons...">
-        </section>
-	 <hr>
-        <section id="Button">
-         <h2>Speaking of buttons...<h2>
-	 <button id="action-button" onclick="handleButtonClick()">Click Me!</button>
+---
+layout: default
+title: Nick's Incredible Website
+description: As my grandma used to say, "Do or do not. There is no try"... or was that Master Yoda?
+---
+<h3>New Advertisers Be Like</h3>
+<img src="{{ 'assets/images/optimize_discovery.jpg' | relative_url }}" alt="Speaking of buttons..." class="responsive-img">
+<p>Click the button below to fetch data from HTTPBin!</p>
+<button id="action-button" aria-label="Fetch data from HTTPBin">Click Me!</button>
+<div id="api-result"></div>
 		 
 <script>
    async function handleButtonClick() {
