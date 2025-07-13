@@ -75,11 +75,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	 <hr>
         <section id="Button">
          <h2>Speaking of buttons...<h2>
-	 <button id="action-button">Click Me!</button>
-	<script>
-	 async function handleButtonClick() {
+	 <button id="action-button" aria-label="Fetch data from HTTPBin">Click Me!</button>
+	 <div id="api-result"></div>
+		 
+<script>
+  async function handleButtonClick() {
     try {
-      const response = await fetch(`https://httpbin.org/get?key=${encodeURIComponent(keyParam)}&value=${encodeURIComponent(valueParam)}`, {
+      const apiUrl = `https://httpbin.org/get?key=${encodeURIComponent(keyParam)}&value=${encodeURIComponent(valueParam)}`;
+      const response = await fetch(apiUrl, {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
@@ -87,16 +90,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         }
       });
 
-      // Check response status
       if (!response.ok) {
         throw new Error(`API call failed with status: ${response.status}`);
       }
 
-      // Parse and display response
       const data = await response.json();
-      document.getElementById('api-result').textContent = `API Response: ${JSON.stringify(data, null, 2)}`;
+      document.getElementById('api-result').textContent = `Key: ${data.args.key || 'none'}, Value: ${data.args.value || 'none'}`;
       console.log('HTTPBin Data:', data);
-	</script>
+
+      });
+    } catch (error) {
+      console.error('API Error:', error);
+      document.getElementById('api-result').textContent = `Error: ${error.message}`;
+      window.dataLayer.push({
+        event: 'button_click',
+        button_id: 'action-button',
+        api_status: 'error',
+        api_error: error.message
+      });
+    }
+  }
+
+  document.getElementById('action-button').addEventListener('click', handleButtonClick);
+</script>
         </section>
 
         <footer>
