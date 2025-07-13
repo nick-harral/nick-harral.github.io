@@ -76,7 +76,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
    <hr>
         <section id="Button">
          <h2>Speaking of buttons...<h2>
- 	  <button id="apiButton">Fetch Data</button>
+ 	  <button id="apiButton">Click This One!</button>
 	  <div id="apiResponse"></div>
 
 	<script>
@@ -89,6 +89,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         try {
             const response = await fetch(apiUrl, { method: 'GET' });
+	    headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
 
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
