@@ -77,36 +77,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		 
          <section id="Button">
           <h2>Speaking of buttons...<h2>
- 	   <button id="apiButton">Click This One!</button>
-	   <div id="apiResponse"></div>
-
-	<script>
-	document.addEventListener("DOMContentLoaded", function() {
-    	const apiButton = document.getElementById("apiButton");
-    	const apiResponse = document.getElementById("apiResponse");
-
-    	apiButton.addEventListener("click", async function() {
-        const apiUrl = `https://httpbin.org/get?key=${encodeURIComponent(keyParam)}&value=${encodeURIComponent(valueParam)}`;
-
-        try {
-            const response = await fetch(apiUrl, { method: 'GET' });
-	    headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            const data = await response.json(); 
-            apiResponse.innerHTML = JSON.stringify(data, null, 2); 
-            console.log(data);
-        } catch (error) {
-            apiResponse.innerHTML = `Error: ${error.message}`;
-            console.error("Error fetching data:", error);
+ 	    <button id="action-button">Click Me!</button>
+     
+	 <script>
+ 	  async function handleButtonClick() {
+  	   try {
+    	   const apiUrl = `https://httpbin.org/get?key=${encodeURIComponent(keyParam)}&value=${encodeURIComponent(valueParam)}`;
+    	   const response = await fetch(apiUrl, {
+	   method: 'GET',
+           headers: {
+             'Accept': 'application/json',
+             'Content-Type': 'application/json'
         }
-	</script>
-	</section>
+      });
+
+     } catch (error) {
+    console.error('Fetch error:', error.message);
+    return null;
+    }    
+
+  // Event Listener
+  document.getElementById('action-button').addEventListener('click', handleButtonClick);
+</script>
+        </section>
 	<hr>
 	      
         <footer>
